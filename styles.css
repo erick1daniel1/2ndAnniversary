@@ -1,0 +1,186 @@
+
+body {
+  background-image: url('images/dg7ssyw-c79f2b26-1b69-4633-8cd6-4256bcca93eb.gif') ;
+  background-repeat: no-repeat;
+  background-size: cover;       /* Expande la imagen para cubrir todo el body */
+  background-position: center;  /* Centra la imagen */
+  background-attachment: fixed; /* Opcional: hace que la imagen quede fija al hacer scroll */
+  margin: 0;                    /* Elimina márgenes predeterminados */
+  height: 100vh;                /* Asegura que el body ocupe toda la ventana */
+}
+
+
+.card {
+  width: 18rem;
+  transition: 
+    width 0.5s ease,
+    height 0.5s ease,
+    top 0.5s ease,
+    left 0.5s ease,
+    border-radius 0.5s ease,
+    transform 0.5s ease,
+    background-color 0.5s ease,
+    box-shadow 0.5s ease;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+
+}
+
+.img-container {
+  position: relative;
+  width: 100%;
+  height: 370px;     
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-img-top {
+  width: 100%;             /* Ocupa todo el ancho de la tarjeta */
+  height: 370px;           /* Altura fija para todas las imágenes */
+  object-fit: cover;       /* Recorta la imagen sin deformarla */
+  object-position: bottom;    /* Muestra la parte superior (ajustable) */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Capa negra semitransparente */
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card:hover .overlay,
+.card.expanded .overlay {
+  opacity: 0;
+}
+.card.fullscreen .overlay {
+  opacity: 0 !important;
+  pointer-events: none; /* para que no interfiera con clicks */
+}
+.img-container:hover .overlay {
+  opacity: 0; /* Al pasar el mouse, desaparece la capa */
+}
+
+
+.card-grid {
+  background-color: rgba(0, 0, 0, 0.3); /* blanco con 30% de opacidad */
+  /* o para negro semitransparente: rgba(0, 0, 0, 0.3); */
+  background-size: cover; 
+  height: 100vh; 
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 10px; /* opcional, bordes redondeados */
+}
+
+
+.card.fullscreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra en la pantalla */
+  width: 80vw;
+  max-width: 600px;
+  height: 70vh;
+  z-index: 1100;
+  margin: 0;
+  border-radius: 10px;
+  background-color: #222;
+  color: white;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.placeholder {
+  width: 18rem;
+  height: 370px; /* Igual que la tarjeta */
+  visibility: hidden; /* Invisible pero ocupa espacio */
+}
+
+body.noscroll {
+  overflow: hidden;
+}
+
+
+/* Fondo desenfocado cuando se abre una tarjeta */
+body.blur {
+  backdrop-filter: blur(100px);
+  transition: backdrop-filter 0.3s ease;
+}
+
+.blur-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.3); /* opcional: oscurece un poco */
+  z-index: 1000; /* debajo de la tarjeta expandida */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.blur-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* permite cerrar al hacer clic */
+  display: block;
+}
+
+
+/* Imagen */
+.card.fullscreen img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transition: object-position 0.5s ease, height 0.5s ease;
+}
+
+/* Ocultar contenido inicialmente */
+.card .card-body {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Mostrar contenido al expandir */
+.card.fullscreen .card-body {
+  display: block;
+  color: white;
+  opacity: 1;
+  padding: 1rem;
+  transition-delay: 0.2s;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+.card {
+  width: 18rem;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  position: relative;
+}
